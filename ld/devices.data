@@ -126,6 +126,7 @@ stm32f401?d* stm32f4 ROM=384K RAM=96K
 stm32f401?e* stm32f4 ROM=512K RAM=96K
 stm32f4[01][57]?e* stm32f4ccm ROM=512K RAM=128K CCM=64K
 stm32f4[01][57]?g* stm32f4ccm ROM=1024K RAM=128K CCM=64K
+stm32f411re stm32f4 ROM=512K RAM=128K
 stm32f4[23][79]?g* stm32f4ccm ROM=1024K RAM=192K CCM=64K
 stm32f4[23][79]?i* stm32f4ccm ROM=2048K RAM=192K CCM=64K
 
@@ -341,7 +342,11 @@ lm3s1601 lm3fury ROM=128K RAM=32K
 lm3s1607 lm3fury ROM=128K RAM=32K
 lm3s1608 lm3fury ROM=128K RAM=32K
 lm3s1620 lm3fury ROM=128K RAM=32K
+lm3s3748 lm3fury ROM=128K RAM=64K
 lm3s8962 lm3fury ROM=256K RAM=64K
+
+lm4f120xl lm4f ROM=128K RAM=32K
+
 
 ################################################################################
 # the TI cortex R4F chips
