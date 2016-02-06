@@ -17,25 +17,9 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_lm3s
-SRCLIBDIR	?= ..
+DEVICE		= lm3s
+OPENCM3_DIR	?= ../..
 
-PREFIX		?= arm-none-eabi
-
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-TGT_CFLAGS	= -Os \
-		  -Wall -Wextra -Wimplicit-function-declaration \
-		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		  -Wundef -Wshadow \
-		  -I../../include -fno-common \
-		  -mcpu=cortex-m3 -mthumb $(FP_FLAGS) -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -DLM3S
-TGT_CFLAGS      += $(DEBUG_FLAGS)
-# ARFLAGS	= rcsv
-ARFLAGS		= rcs
 OBJS		= gpio.o vector.o assert.o
-
-VPATH += ../cm3
 
 include ../Makefile.include

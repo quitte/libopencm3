@@ -18,25 +18,9 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_vf6xx
-SRCLIBDIR	?= ..
+DEVICE		= vf6xx
+OPENCM3_DIR	?= ../..
 
-FP_FLAGS	?= -mfloat-abi=hard -mfpu=fpv4-sp-d16
-PREFIX		?= arm-none-eabi
-
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-TGT_CFLAGS	= -Os \
-		  -Wall -Wextra -Wimplicit-function-declaration \
-		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		  -Wundef -Wshadow \
-		  -I../../include -fno-common \
-		  -mcpu=cortex-m4 -mthumb $(FP_FLAGS) -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -DVF6XX
-TGT_CFLAGS      += $(DEBUG_FLAGS)
-ARFLAGS		= rcs
 OBJS		= ccm.o uart.o gpio.o iomuxc.o
-
-VPATH += ../cm3
 
 include ../Makefile.include

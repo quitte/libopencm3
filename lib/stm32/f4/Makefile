@@ -18,23 +18,9 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_stm32f4
-SRCLIBDIR	?= ../..
+DEVICE		= stm32f4
+OPENCM3_DIR	?= ../../..
 
-FP_FLAGS	?= -mfloat-abi=hard -mfpu=fpv4-sp-d16
-PREFIX	        ?= arm-none-eabi
-
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-TGT_CFLAGS	= -Os \
-		  -Wall -Wextra -Wimplicit-function-declaration \
-		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		  -Wundef -Wshadow \
-		  -I../../../include -fno-common \
-		  -mcpu=cortex-m4 -mthumb $(FP_FLAGS) \
-		  -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -DSTM32F4
-TGT_CFLAGS      += $(DEBUG_FLAGS)
 # ARFLAGS	= rcsv
 ARFLAGS		= rcs
 
@@ -55,9 +41,8 @@ OBJS            += usb.o usb_standard.o usb_control.o usb_fx07_common.o \
 
 OBJS		+= mac.o phy.o mac_stm32fxx7.o phy_ksz8051mll.o fmc.o
 
-OBJS		+= ltdc.o 
-
-VPATH += ../../usb:../:../../cm3:../common
-VPATH += ../../ethernet
+OBJS		+= ltdc.o
 
 include ../../Makefile.include
+
+VPATH += ../:../common

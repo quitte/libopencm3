@@ -19,30 +19,13 @@
 ## along with this library. If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_efm32lg
-SRCLIBDIR	?= ../..
-FAMILY		= EFM32LG
+DEVICE		= efm32lg
+OPENCM3_DIR	?= ../../..
 
-PREFIX		?= arm-none-eabi
-#PREFIX		?= arm-elf
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-TGT_CFLAGS	= -Os \
-		  -Wall -Wextra -Wimplicit-function-declaration \
-		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		  -Wundef -Wshadow \
-		  -I../../../include -fno-common \
-		  -mcpu=cortex-m3 $(FP_FLAGS) -mthumb -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -D$(FAMILY)
-TGT_CFLAGS      += $(DEBUG_FLAGS)
-# ARFLAGS	= rcsv
-ARFLAGS		= rcs
 OBJS		=
 
 OBJS		= gpio.o cmu.o prs.o adc.o dma.o timer.o dac.o
 OBJS		+= usb.o usb_control.o usb_standard.o usb_efm32lg.o
-
-VPATH += ../../usb:../:../../cm3
 
 include ../../Makefile.include
 

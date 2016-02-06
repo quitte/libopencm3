@@ -17,21 +17,8 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_stm32f0
-SRCLIBDIR	?= ../..
-
-PREFIX		?= arm-none-eabi
-#PREFIX		?= arm-elf
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-TGT_CFLAGS	= -Os \
-		  -Wall -Wextra -Wimplicit-function-declaration \
-		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		  -Wundef -Wshadow \
-		  -I../../../include -fno-common \
-		  -mcpu=cortex-m0 $(FP_FLAGS) -mthumb -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -DSTM32F0
-TGT_CFLAGS      += $(DEBUG_FLAGS)
+DEVICE		= stm32f0
+OPENCM3_DIR	= ../../..
 
 ARFLAGS		= rcs
 
@@ -48,7 +35,6 @@ OBJS		+= crs_common_all.o
 OBJS		+= usb.o usb_control.o usb_standard.o
 OBJS		+= st_usbfs_core.o st_usbfs_v2.o
 
-VPATH += ../../usb:../:../../cm3:../common
-
 include ../../Makefile.include
 
+VPATH += ../:../common

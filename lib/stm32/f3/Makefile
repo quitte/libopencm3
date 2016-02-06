@@ -17,22 +17,8 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_stm32f3
-SRCLIBDIR	?= ../..
-
-FP_FLAGS	?= -mfloat-abi=hard -mfpu=fpv4-sp-d16
-PREFIX	        ?= arm-none-eabi
-
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-TGT_CFLAGS	= -Os \
-		  -Wall -Wextra -Wimplicit-function-declaration \
-		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		  -Wundef -Wshadow \
-		  -I../../../include -fno-common \
-		  -mcpu=cortex-m4 -mthumb $(FP_FLAGS) -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -DSTM32F3
-TGT_CFLAGS      += $(DEBUG_FLAGS)
+DEVICE		= stm32f3
+OPENCM3_DIR	?= ../../..
 
 ARFLAGS		= rcs
 
@@ -47,6 +33,7 @@ OBJS            += gpio_common_all.o gpio_common_f0234.o \
 OBJS		+= usb.o usb_control.o usb_standard.o
 OBJS		+= st_usbfs_core.o st_usbfs_v1.o
 
-VPATH += ../../usb:../:../../cm3:../common
-
 include ../../Makefile.include
+
+VPATH += ../:../common
+

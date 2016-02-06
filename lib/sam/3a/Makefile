@@ -17,22 +17,12 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_sam3a
-SRCLIBDIR	?= ../..
+DEVICE		= sam3a
+OPENCM3_DIR	?= ../../..
 
-PREFIX		?= arm-none-eabi
-
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-TGT_CFLAGS	= -Os -Wall -Wextra -I../../../include -fno-common \
-		  -mcpu=cortex-m3 -mthumb $(FP_FLAGS) -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -DSAM3A
-TGT_CFLAGS      += $(DEBUG_FLAGS)
-# ARFLAGS	= rcsv
-ARFLAGS		= rcs
 OBJS		= gpio_common_all.o gpio_common_3a3u3x.o pmc.o usart.o
 
-VPATH += ../../usb:../../cm3:../common
-
 include ../../Makefile.include
+
+VPATH += ../common
 

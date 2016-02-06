@@ -18,32 +18,12 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_stm32f7
-SRCLIBDIR	?= ../..
-
-PREFIX		?= arm-none-eabi
-
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-
-# STM32F7 only supports single precision FPU
-FP_FLAGS	?= -mfloat-abi=hard -mfpu=fpv5-sp-d16
-
-CFLAGS		= -Os -g \
-		  -Wall -Wextra -Wimplicit-function-declaration \
-		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		  -Wundef -Wshadow \
-		  -I../../../include -fno-common \
-		  -mcpu=cortex-m7 -mthumb $(FP_FLAGS) \
-		  -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -DSTM32F7
+DEVICE		= stm32f7
+SRCLIBDIR	?= ../../..
 
 ARFLAGS		= rcs
 
 OBJS		= gpio.o gpio_common_all.o gpio_common_f0234.o
-
-VPATH += ../../usb:../:../../cm3:../common
-VPATH += ../../ethernet
 
 ###############################################################################
 # Checking CPU support in the toolchain
@@ -68,3 +48,6 @@ $(SRCLIBDIR)/$(LIBNAME).a:
 else
   include ../../Makefile.include
 endif
+
+VPATH += ../:../common
+

@@ -17,25 +17,10 @@
 ## along with this library.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-LIBNAME		= libopencm3_lpc17xx
-SRCLIBDIR	?= ..
+DEVICE		= lpc17xx
+OPENCM3_DIR	?= ../..
 
-PREFIX		?= arm-none-eabi
-
-CC		= $(PREFIX)-gcc
-AR		= $(PREFIX)-ar
-TGT_CFLAGS	= -Os \
-		  -Wall -Wextra -Wimplicit-function-declaration \
-		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
-		  -Wundef -Wshadow \
-		  -I../../include -fno-common \
-		  -mcpu=cortex-m3 -mthumb $(FP_FLAGS) -Wstrict-prototypes \
-		  -ffunction-sections -fdata-sections -MD -DLPC17XX
-TGT_CFLAGS      += $(DEBUG_FLAGS)
-# ARFLAGS	= rcsv
 ARFLAGS		= rcs
 OBJS		= gpio.o pwr.o
-
-VPATH += ../cm3
 
 include ../Makefile.include
