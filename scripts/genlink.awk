@@ -39,16 +39,8 @@ BEGIN {
 	if (PAT ~ tmp) {
 		if ($2 != "+")
 			PAT=$2;
-
-		for (i = 3; i <= NF; i = i + 1) {
-			if ($i ~ /^FAMILY=/) {
-				if ("FAMILY" ~ MODE){
-					sub(/[^=]*=/,"",$i);
-					printf "%s",$i;
-					exit;
-				}
-			}
-			else if ($i ~ /^CPU=/) {
+                for (i = 3; i <= NF; i = i + 1) {
+			if ($i ~ /^CPU=/) {
 				if ("CPU" ~ MODE){
 					sub(/[^=]*=/,"",$i);
 					printf "%s",$i;
@@ -71,8 +63,20 @@ BEGIN {
 				printf "%s ",$i;
 			}
 		}
-
-		if (PAT=="END")
+		if (PAT=="END"){
+			if ("FAMILY" ~ MODE)
+				printf "%s",family;
+			else if ("SUBFAMILY" ~ MODE)
+				printf "%s",subfamily;
 			exit;
+		}
+		else{
+			subfamily = family;
+			family = PAT;
+	                if ("CPPFLAGS" ~ MODE)
+				printf "-D%s ",toupper(PAT);
+			else if("DEFS" ~ MODE)
+				printf "-D%s ",toupper(PAT);
+		}
 	}
 }
