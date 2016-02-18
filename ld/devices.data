@@ -365,7 +365,7 @@ sam3xnfc sam3x NFCRAM=4K NFCRAM_OFF=0x20100000
 ################################################################################
 # the lpc family groups
 
-
+lpc13 lpc13xx
 lpc13u lpc13xx USBRAM_OFF=0x20004000
 
 lpc17[56]x lpc17xx RAM1_OFF=0x2007C000 RAM2_OFF=0x20080000
