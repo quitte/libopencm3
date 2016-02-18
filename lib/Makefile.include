@@ -43,10 +43,10 @@ OBJS += vector.o systick.o scb.o nvic.o assert.o sync.o dwt.o
 DEBUG_FLAGS ?= -ggdb3
 CFLAGS += $(DEBUG_FLAGS)
 
-all: $(OPENCM3_DIR)/lib/libopencm3_$(family).a
+all: $(OPENCM3_DIR)/lib/libopencm3_$(DEVICE).a
 
-$(OPENCM3_DIR)/lib/libopencm3_$(family).a: $(OBJS)
-	@printf "  AR      libopencm3_$(family).a\n"
+$(OPENCM3_DIR)/lib/libopencm3_$(DEVICE).a: $(OBJS)
+	@printf "  AR      libopencm3_$(DEVICE).a\n"
 	$(Q)$(AR) $(ARFLAGS) "$@" $(OBJS)
 
 clean:
