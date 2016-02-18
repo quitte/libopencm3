@@ -371,8 +371,8 @@ lpc13u lpc13xx USBRAM_OFF=0x20004000
 lpc17[56]x lpc17xx RAM1_OFF=0x2007C000 RAM2_OFF=0x20080000
 lpc17[78]x lpc17xx RAM1_OFF=0x20000000 RAM2_OFF=0x20040000
 
-lpc43xx_m0 lpc43xx CPU=cortex_m0 FPU=soft
-lpc43xx_m4 lpc43xx CPU=cortex_m4 FPU=hard-fp4-sp-d16
+lpc43xx_m0 lpc43xx CPU=cortex-m0 FPU=soft
+lpc43xx_m4 lpc43xx CPU=cortex-m4 FPU=hard-fp4-sp-d16
 
 ################################################################################
 ################################################################################
@@ -408,7 +408,7 @@ lpc13xx END ROM_OFF=0x00000000 RAM_OFF=0x10000000 RAM1_OFF=0x20000000 CPU=cortex
 lpc17xx END ROM_OFF=0x00000000 RAM_OFF=0x10000000 CPU=cortex-m3 FPU=soft
 lpc43xx + ROM_OFF=0x1A000000 ROM1_OFF=0x1B000000 RAM_OFF=0x10000000 RAM1_OFF=0x10080000
 lpc43xx + RAM2_OFF=0x20000000 RAM3_OFF=0x20008000
-lpc43xx END CPU=cortex_m4 FPU=hard-fpv4-sp-d16
+lpc43xx END CPU=cortex-m4 FPU=hard-fpv4-sp-d16
 
 ################################################################################
 # the efm32 Gecko families
@@ -421,14 +421,20 @@ efm32gg END ROM_OFF=0x00000000 RAM_OFF=0x20000000 RAM1_OFF=0x10000000 CPU=cortex
 efm32wg END ROM_OFF=0x00000000 RAM_OFF=0x20000000 RAM1_OFF=0x10000000 CPU=cortex-m4 FPU=hard-fpv4-sp-d16
 
 ################################################################################
-# Cortex LM3 families
+# Cortex LM3 and LM4 families
 
 lm3fury lm3s
 lm3sandstorm lm3s
 lm3s END ROM_OFF=0x00000000 RAM_OFF=0x20000000 CPU=cortex-m3 FPU=soft
+lm4f END CPU=cortex-m4 FPU=hard-fpv4-sp-d16
 
 
 ################################################################################
 # Cortex R4F families
 
 rm46l END ROM_OFF=0x00000000 RAM_OFF=0x08000000 RAM1_OFF=0x08400000
+
+################################################################################
+# VF6xx families
+
+vf6xx END CPU=cortex-m4 FPU=hard-fpv4-sp-d16
