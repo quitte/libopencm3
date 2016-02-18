@@ -73,7 +73,12 @@ SECTIONS
 		. = ALIGN(4);
 		*(.rodata*)	/* Read-only data */
 		. = ALIGN(4);
-	} >rom
+	} >
+#if defined(_ROM)
+rom
+#else
+ram
+#endif
 
 	/* C++ Static constructors/destructors, also used for
 	 * __attribute__((constructor)) and the likes.
@@ -83,34 +88,58 @@ SECTIONS
 		__preinit_array_start = .;
 		KEEP (*(.preinit_array))
 		__preinit_array_end = .;
-	} >rom
+	} >
+#if defined(_ROM)
+rom
+#else
+ram
+#endif
 	.init_array : {
 		. = ALIGN(4);
 		__init_array_start = .;
 		KEEP (*(SORT(.init_array.*)))
 		KEEP (*(.init_array))
 		__init_array_end = .;
-	} >rom
+	} >
+#if defined(_ROM)
+rom
+#else
+ram
+#endif
 	.fini_array : {
 		. = ALIGN(4);
 		__fini_array_start = .;
 		KEEP (*(.fini_array))
 		KEEP (*(SORT(.fini_array.*)))
 		__fini_array_end = .;
-	} >rom
-
+	} >
+#if defined(_ROM)
+rom
+#else
+ram
+#endif
 	/*
 	 * Another section used by C++ stuff, appears when using newlib with
 	 * 64bit (long long) printf support
 	 */
 	.ARM.extab : {
 		*(.ARM.extab*)
-	} >rom
+	} >
+#if defined(_ROM)
+rom
+#else
+ram
+#endif
 	.ARM.exidx : {
 		__exidx_start = .;
 		*(.ARM.exidx*)
 		__exidx_end = .;
-	} >rom
+	} >
+#if defined(_ROM)
+rom
+#else
+ram
+#endif
 
 	. = ALIGN(4);
 	_etext = .;
@@ -120,7 +149,12 @@ SECTIONS
 		*(.data*)	/* Read-write initialized data */
 		. = ALIGN(4);
 		_edata = .;
-	} >ram AT >rom
+	} >ram AT >
+#if defined(_ROM)
+rom
+#else
+ram
+#endif
 	_data_loadaddr = LOADADDR(.data);
 
 	.bss : {
