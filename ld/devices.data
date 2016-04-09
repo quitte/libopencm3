@@ -4,6 +4,7 @@
 #
 # Copyright (c) 2013 Frantisek Burian <Bufran@seznam.cz>
 # Copyright (C) 2013 Werner Almesberger <wpwrak>
+# Copyright (c) 2016 Jonas Meyer <quitte>
 #
 # Line description:
 #   <pattern> <parent> (<data> ...)
@@ -20,8 +21,10 @@
 #             "END" - Exit traversal.
 #             "+"   - Don't change the parent. Use for split long line to two.
 #
-#   <data>: space-separated list of preprocessor symbols supplied to the linker.
-#       -D option name is automatically prepended to each symbol definition
+#   <data>: space-separated list of key=value pairs. Other strings are legal
+#	syntax, but are currently unused.
+#	The following is a list of some of the currently used keys:
+#		CPU,FPU,ROM,RAM,ROM_OFFSET,RAM_OFFSET		
 #
 # All lines starting with # symbol are treated as Comments
 #
@@ -56,7 +59,15 @@
 # stm32f051c8t6
 #
 # --- output of the awk script ---
-# -DROM=16K -DRAM=4K -DROM_OFF=0x08000000 -DRAM_OFF=0x20000000
+# awk -v PAT="stm32f051c8t6" -v MODE="CPU" -f ./scripts/genlink.awk ./ld/devices.data
+#	cortex-m0
+# awk -v PAT="stm32f051c8t6" -v MODE="CPPFLAGS" -f ./scripts/genlink.awk ./ld/devices.data
+#	-DSTM32F051C8T6 -DSTM32F0
+# awk -v PAT="stm32f051c8t6" -v MODE="DEFS" -f ./scripts/genlink.awk ./ld/devices.data
+#	-D_ROM=64K -D_RAM=8K -DSTM32F0 -D_ROM_OFF=0x08000000 -D_RAM_OFF=0x20000000
+#
+# The awk script should not be used directly, but instead be used by including
+# the Makefiles in the mk/ directory to your project.
 #
 # The generated linker script file will contain sections rom and ram with 
 # appropriate initialization code, specified in linker file source linker.ld.S
