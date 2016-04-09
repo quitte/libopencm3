@@ -37,6 +37,9 @@ ifeq ($(genlink_cpu),$(filter $(genlink_cpu),cortex-m0 cortex-m0plus cortex-m3 c
 ARCH_FLAGS    +=-mthumb
 endif
 
+ifdef FP_FLAGS
+ARCH_FLAGS	+= $(FP_FLAGS)
+else
 ifeq ($(genlink_fpu),soft)
 ARCH_FLAGS	+= -msoft-float
 else ifeq ($(genlink_fpu),hard-fpv4-sp-d16)
@@ -45,6 +48,7 @@ else ifeq ($(genlink_fpu),hard-fpv5-sp-d16)
 ARCH_FLAGS      += -mfloat-abi=hard -mfpu=fpv5-sp-d16
 else
 $(warning No match for the FPU flags)
+endif
 endif
 
 

@@ -104,6 +104,9 @@ CPPFLAGS		(appended)
 
 ARCH_FLAGS	(replaced)
  - Architecture build flags for specified chip.
+ * If FP_FLAGS is set before including genlink-config.mk it is
+   appended to ARCH_FLAGS, instead of the value calculated from
+   the devices.data file.
  * No needed to handle this variable if you use module <gcc> too.
 
 LDSCRIPT	(replaced)
