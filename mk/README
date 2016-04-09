@@ -86,7 +86,8 @@ linker script will be generated as the file $(DEVICE).ld in the project folder,
 and automatically be used for the linking process.
 $(DEVICE).ld is a make target, that other targets can depend on to trigger the
 generation.
-Additionally the matching library is added to the LDLIBS variable.
+Additionally various variables are replaced or appended to match your selected
+device. See below for details.
 
 Variables to control the build process (should be set in your makefile):
 ------------------------------------------------------------------------
