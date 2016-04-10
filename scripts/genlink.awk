@@ -33,7 +33,7 @@ BEGIN {
 	gsub(/?/, ".", tmp);
 	gsub(/*/, ".*", tmp);
 	gsub(/+/, ".+", tmp);
-	tolower(tmp);
+	tmp = tolower(tmp);
 
 	if (PAT ~ tmp) {
 		if ("CPPFLAGS" == MODE)
