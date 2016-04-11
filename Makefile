@@ -93,17 +93,4 @@ styleclean: $(STYLECHECKFILES:=.styleclean)
 %.styleclean:
 	$(Q)rm -f $*.stylecheck;
 
-
-LDTESTS		:=$(wildcard ld/tests/*.data)
-
-genlinktests: $(LDTESTS:.data=.ldtest)
-
-%.ldtest:
-	@if ./scripts/genlinktest.sh $* >/dev/null; then\
-		printf "  TEST  OK  : $*\n";		\
-	else						\
-		printf "  TEST FAIL : $*\n";		\
-	fi;
-
-
-.PHONY: build lib $(LIB_DIRS) doc clean generatedheaders cleanheaders stylecheck genlinktests
+.PHONY: build lib $(LIB_DIRS) doc clean generatedheaders cleanheaders stylecheck
