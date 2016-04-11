@@ -7,6 +7,7 @@
 # 
 # Copyright (C) 2013 Frantisek Burian <Bufran@seznam.cz>
 # Copyright (C) 2013 Werner Almesberger <wpwrak>
+# Copyright (C) 2016 Jonas Meyer <quitte@gmail.com>
 # 
 # This library is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published by
@@ -23,8 +24,7 @@
 
 BEGIN {
 	PAT = tolower(PAT);
-	if (length(MODE) == 0)
-		MODE = ".*";
+	family = PAT;
 }
 !/^#/{
 	#remove cr on windows
@@ -34,32 +34,45 @@ BEGIN {
 	gsub(/?/, ".", tmp);
 	gsub(/*/, ".*", tmp);
 	gsub(/+/, ".+", tmp);
-	tolower(tmp);
+	tmp = tolower(tmp);
 
 	if (PAT ~ tmp) {
+		if ("CPPFLAGS" == MODE)
+			printf "-D%s ",toupper(PAT);
 		if ($2 != "+")
 			PAT=$2;
-
-		for (i = 3; i <= NF; i = i + 1) {
-			if ($i ~ /^-l/) {
-				if ("LIB" ~ MODE)
-					printf "%s ",$i;
+                for (i = 3; i <= NF; i = i + 1) {
+			if ($i ~ /^CPU=/) {
+				if ("CPU" == MODE){
+					sub(/[^=]*=/,"",$i);
+					printf "%s",$i;
+					exit;
+				}
 			}
-			else if ($i ~ /^-m/) {
-				if ("ARCH" ~ MODE)
-					printf "%s ",$i;
+			else if ($i ~ /^FPU=/) {
+				if ("FPU" == MODE){
+					sub(/[^=]*=/,"",$i);
+					printf "%s",$i;
+					exit;
+				}
 			}
-			else if ($i ~ /^-D/) {
-				if ("DEFS" ~ MODE)
-					printf "%s ",$i;
-			}
-			else {
-				if ("DEFS" ~ MODE)
+			else if ($i ~ /[[:upper:]]*=/) {
+				if ("DEFS" == MODE)
 					printf "-D_%s ",$i;
 			}
 		}
-
-		if (PAT=="END")
+		if (PAT=="END"){
+			if ("FAMILY" == MODE)
+				printf "%s",family;
+			else if ("SUBFAMILY" == MODE)
+				printf "%s",subfamily;
 			exit;
+		}
+		else{
+			subfamily = family;
+			family = PAT;
+	                if("DEFS" == MODE)
+				printf "-D%s ",toupper(PAT);
+		}
 	}
 }

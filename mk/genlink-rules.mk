@@ -2,6 +2,7 @@
 ## This file is part of the libopencm3 project.
 ##
 ## Copyright (C) 2014 Frantisek Burian <BuFran@seznam.cz>
+## Copyright (C) 2016 Jonas Meyer <quitte@gmail.com>
 ##
 ## This library is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU Lesser General Public License as published by
@@ -18,8 +19,5 @@
 ##
 
 $(LDSCRIPT):$(OPENCM3_DIR)/ld/linker.ld.S
-ifeq ($(GENLINK_DEFS),)
-	$(error unknown device $(DEVICE) for the linker. Cannot generate ldscript)
-endif
 	@printf "  GENLNK  $@\n"
-	$(Q)$(CPP) $(GENLINK_DEFS) -P -E $< > $@
+	$(Q)$(CPP) $(ARCH_FLAGS) $(shell awk -v PAT="$(basename $@)" -v MODE="DEFS" -f $(OPENCM3_DIR)/scripts/genlink.awk $(OPENCM3_DIR)/ld/devices.data 2>/dev/null) -P -E $< > $@
